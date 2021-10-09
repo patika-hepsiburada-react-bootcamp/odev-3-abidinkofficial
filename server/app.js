@@ -27,6 +27,8 @@ io.on("connection", (socket) => {
     data = receivedData
     io.emit("data", data)
   })
+
+  socket.on('disconnect', () => console.log('A user is disconnected.'));
 })
 
 app.listen(5000, () => {
