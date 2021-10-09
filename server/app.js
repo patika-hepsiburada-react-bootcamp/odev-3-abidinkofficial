@@ -1,12 +1,15 @@
 import express from "express"
 import http from "http"
+import cors from "cors"
 import { Server } from "socket.io"
 
 const app = express()
 const httpServer = http.createServer(app)
 const io = new Server(httpServer)
 
-const data = {
+app.use(cors())
+
+let data = {
   option1: 0,
   option2: 0,
   option3: 0,
@@ -14,7 +17,7 @@ const data = {
 }
 
 app.get("/", (req, res) => {
-  res.json({"message": "Voting application server is running."})
+  res.json({"message": "Server is running."})
 })
 
 io.on("connection", (socket) => {
@@ -31,6 +34,6 @@ io.on("connection", (socket) => {
   socket.on('disconnect', () => console.log('A user is disconnected.'));
 })
 
-app.listen(5000, () => {
-  console.log("Voting application server started on PORT: 5000")
+httpServer.listen(5000, () => {
+  console.log("Server started on PORT: 5000")
 })
