@@ -1,7 +1,7 @@
 import styles from "./Form.module.css"
 import { sendData } from "../../api/socket"
 
-const Form = ({ data }) => {
+const Form = () => {
   return (
     <div className={styles.form}>
       <h1>Kadere inanır mısın Neo?</h1>
