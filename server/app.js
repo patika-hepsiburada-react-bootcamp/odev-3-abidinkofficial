@@ -6,6 +6,7 @@ import { Server } from "socket.io"
 const app = express()
 const httpServer = http.createServer(app)
 const io = new Server(httpServer)
+const PORT = process.env.PORT || 5000
 
 app.use(cors())
 
@@ -41,6 +42,6 @@ io.on("connection", (socket) => {
   socket.on('disconnect', () => console.log('A user is disconnected.'));
 })
 
-httpServer.listen(5000, () => {
-  console.log("Server started on PORT: 5000")
+httpServer.listen(PORT, () => {
+  console.log(`Server started on PORT: ${PORT}`)
 })
