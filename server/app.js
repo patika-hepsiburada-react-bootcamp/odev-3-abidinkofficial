@@ -11,9 +11,7 @@ app.use(cors())
 
 let data = {
   option1: 0,
-  option2: 0,
-  option3: 0,
-  option4: 0
+  option2: 0
 }
 
 app.get("/", (req, res) => {
@@ -27,7 +25,16 @@ io.on("connection", (socket) => {
 
   socket.on("data", (receivedData) => {
     console.log(`Received data: ${receivedData}`)
-    data = receivedData
+    switch (receivedData) {
+      case "option1":
+        data.option1++
+        break;
+      case "option2":
+        data.option2++
+        break;
+      default:
+        console.log("Invalid input")
+    }
     io.emit("data", data)
   })
 

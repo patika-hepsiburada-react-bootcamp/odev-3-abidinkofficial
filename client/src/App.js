@@ -1,18 +1,20 @@
-import { useEffect } from "react"
-import { connectToSocket, subscribeToChannel, sendData } from "./api/socket"
+import { useEffect, useState } from "react"
+import { connectToSocket, subscribeToChannel } from "./api/socket"
 import './App.css';
 
+import Home from "./pages/Home"
+
 const App = () => {
+  const [data, setData] = useState(null)
   
   useEffect(() => {
     connectToSocket()
-    subscribeToChannel("data", (data) => console.log(data))
+    subscribeToChannel("data", (data) => setData(() => data))
   }, [])
   
   return (
     <div className="App">
-      Ödev 3 - Client
-      <button type="button" onClick={() => sendData("data", "test")}>Send</button>
+      <Home data={data} />
     </div>
   );
 }
